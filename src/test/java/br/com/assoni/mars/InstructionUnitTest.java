@@ -10,8 +10,8 @@ import java.util.function.Consumer;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import br.com.assoni.mars.enums.MarsExceptionType;
 import br.com.assoni.mars.enums.Orientation;
-import br.com.assoni.mars.exception.MarsException;
 import br.com.assoni.mars.objects.Instruction;
 import br.com.assoni.mars.objects.Robot;
 import br.com.assoni.mars.objects.World;
@@ -20,7 +20,7 @@ public class InstructionUnitTest {
 
 	@Test
 	public void should_throw_exception_when_empty_comand(){
-		assertThatThrownBy(() -> { new Instruction(""); }).hasSameClassAs(MarsException.class);
+		assertThatThrownBy(()-> {new Instruction("");}).extracting("type").contains(MarsExceptionType.EMPTY_COMMAND);
 	}
 	
 	@Test
@@ -32,7 +32,7 @@ public class InstructionUnitTest {
 	
 	@Test
 	public void should_throw_exception_when_unknow_command(){
-		assertThatThrownBy(() -> {new Instruction("T").execute(Mockito.mock(Robot.class));}).hasSameClassAs(MarsException.class);
+		assertThatThrownBy(() -> {new Instruction("T").execute(Mockito.mock(Robot.class));}).extracting("type").contains(MarsExceptionType.INVALID_COMMAND);
 	}
 	
 	@Test

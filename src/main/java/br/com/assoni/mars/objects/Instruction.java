@@ -7,14 +7,15 @@ import java.util.Optional;
 import org.springframework.util.StringUtils;
 
 import br.com.assoni.mars.enums.Direction;
+import br.com.assoni.mars.enums.MarsExceptionType;
+import br.com.assoni.mars.exception.MarsException;
 
 public class Instruction {
 	private List<String> commands;
 	
 	public Instruction(String command){
 		if(StringUtils.isEmpty(command)){
-			//nao encotrado nenhum comando para execucao
-			throw new RuntimeException("...");
+			throw new MarsException(MarsExceptionType.EMPTY_COMMAND);
 		}
 		
 		this.commands = Arrays.asList(command.split(""));
@@ -30,13 +31,13 @@ public class Instruction {
 				return robot.walk();
 			}
 			
-			Direction direction = Direction.extract(cmd); 
+			Optional<Direction> optional = Direction.extract(cmd); 
 			
-			if(direction == null){
-				throw new RuntimeException("....");
+			if(!optional.isPresent()){
+				throw new MarsException(MarsExceptionType.INVALID_COMMAND, cmd);
 			}
 			
-			return robot.turn(direction);
+			return robot.turn(optional.get());
 		}).reduce((a,b) -> b);
 	}
 }

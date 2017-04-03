@@ -1,7 +1,9 @@
 package br.com.assoni.mars.objects;
 
 import br.com.assoni.mars.enums.Direction;
+import br.com.assoni.mars.enums.MarsExceptionType;
 import br.com.assoni.mars.enums.Orientation;
+import br.com.assoni.mars.exception.MarsException;
 
 public class Robot {
 	private Orientation orientation;
@@ -21,7 +23,7 @@ public class Robot {
 		this.location.move(this.orientation);	
 		
 		if(!this.location.isValidLocation()){
-			throw new RuntimeException("...");
+			throw new MarsException(MarsExceptionType.INVALID_LOCATION);
 		}
 		return this;
 	}

@@ -9,8 +9,8 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import br.com.assoni.mars.enums.Direction;
+import br.com.assoni.mars.enums.MarsExceptionType;
 import br.com.assoni.mars.enums.Orientation;
-import br.com.assoni.mars.exception.MarsException;
 import br.com.assoni.mars.objects.Robot;
 import br.com.assoni.mars.objects.World;
 
@@ -52,6 +52,6 @@ public class RobotUnitTest {
 		
 		Robot robot = new Robot(wold); 
 		
-		assertThatThrownBy(()-> {robot.walk();}).hasSameClassAs(MarsException.class);
+		assertThatThrownBy(()-> {robot.walk();}).extracting("type").contains(MarsExceptionType.INVALID_LOCATION);
 	}
 }

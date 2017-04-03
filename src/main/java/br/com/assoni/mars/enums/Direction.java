@@ -1,6 +1,7 @@
 package br.com.assoni.mars.enums;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum Direction {
 	RIGHT("R"),
@@ -16,11 +17,10 @@ public enum Direction {
 		return key;
 	}
 	
-	public static Direction extract(String direction){
+	public static Optional<Direction> extract(String direction){
 		return Arrays.asList(values())
 					 .stream()
 					 .filter(f -> f.getKey().equalsIgnoreCase(direction))
-					 .findFirst()
-					 .orElseThrow(()-> new RuntimeException("...."));
+					 .findFirst();
 	}
 }
