@@ -12,7 +12,8 @@ import br.com.assoni.mars.enums.Direction;
 import br.com.assoni.mars.enums.MarsExceptionType;
 import br.com.assoni.mars.enums.Orientation;
 import br.com.assoni.mars.objects.Robot;
-import br.com.assoni.mars.objects.World;
+import br.com.assoni.mars.objects.location.Location;
+import br.com.assoni.mars.objects.location.World;
 
 public class RobotUnitTest {
 
@@ -24,13 +25,15 @@ public class RobotUnitTest {
 		   assertThat(robot.getPosition()).contains(Orientation.NORTH.getKey());
 		};
 			
-		assertThat(new Robot(new World())).satisfies(robotRequirements);
+		Location location = new Location(new World(), 0L, 0L);
+		assertThat(new Robot(location)).satisfies(robotRequirements);
 	}
 	
 	@Test
 	public void should_turn_on_direction(){
-		assertThat(new Robot(new World()).turn(Direction.LEFT).getPosition()).contains(Orientation.WEST.getKey());
-		assertThat(new Robot(new World()).turn(Direction.RIGHT).getPosition()).contains(Orientation.EAST.getKey());
+		Location location = new Location(new World(), 0L, 0L);
+		assertThat(new Robot(location).turn(Direction.LEFT).getPosition()).contains(Orientation.WEST.getKey());
+		assertThat(new Robot(location).turn(Direction.RIGHT).getPosition()).contains(Orientation.EAST.getKey());
 	}
 	
 	@Test
@@ -41,7 +44,7 @@ public class RobotUnitTest {
 		   assertThat(robot.getPosition()).contains(Orientation.NORTH.getKey());
 		};
 			
-		Robot robot = new Robot(new World()).walk(); 
+		Robot robot = new Robot(new Location(new World(), 0L, 0L)).walk(); 
 		assertThat(robot).satisfies(robotRequirements);
 	}
 	
@@ -50,7 +53,7 @@ public class RobotUnitTest {
 		World wold = Mockito.mock(World.class);
 		Mockito.when(wold.isValidLatitude(Mockito.anyObject())).thenReturn(Boolean.FALSE);
 		
-		Robot robot = new Robot(wold); 
+		Robot robot = new Robot(new Location(wold, 0L, 0L)); 
 		
 		assertThatThrownBy(()-> {robot.walk();}).extracting("type").contains(MarsExceptionType.INVALID_LOCATION);
 	}

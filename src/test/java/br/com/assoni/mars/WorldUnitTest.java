@@ -4,7 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-import br.com.assoni.mars.objects.World;
+import br.com.assoni.mars.objects.location.World;
 
 public class WorldUnitTest {
 

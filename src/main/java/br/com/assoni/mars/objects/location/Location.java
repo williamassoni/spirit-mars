@@ -1,4 +1,4 @@
-package br.com.assoni.mars.objects;
+package br.com.assoni.mars.objects.location;
 
 import br.com.assoni.mars.enums.Orientation;
 
@@ -11,14 +11,10 @@ public class Location {
 	
 	private World world;
 	
-	private Location(World world,Long latitude,Long longitude){
+	public Location(World world,Long latitude,Long longitude){
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.world = world;
-	}
-	
-	public static Location createNewLocation(World world,Long latitude,Long longitude){
-		return new Location(world,latitude, longitude);
 	}
 	
 	public Long getCurrentLatitude(){

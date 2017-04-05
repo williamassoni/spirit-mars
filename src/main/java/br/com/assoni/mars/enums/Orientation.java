@@ -1,8 +1,6 @@
 package br.com.assoni.mars.enums;
 
-import br.com.assoni.mars.objects.location.Moviment;
-
-public enum Orientation implements Moviment<Orientation>{
+public enum Orientation {
 	NORTH("N"){
 		@Override
 		public Orientation turn(Direction direction) {
@@ -37,4 +35,6 @@ public enum Orientation implements Moviment<Orientation>{
 	public String getKey(){
 		return key;
 	}
+	
+	public abstract Orientation turn(Direction direction);
 }

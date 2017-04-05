@@ -11,8 +11,8 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import br.com.assoni.mars.enums.Orientation;
-import br.com.assoni.mars.objects.Location;
-import br.com.assoni.mars.objects.World;
+import br.com.assoni.mars.objects.location.Location;
+import br.com.assoni.mars.objects.location.World;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LocationUnitTest {
@@ -25,12 +25,12 @@ public class LocationUnitTest {
 		Mockito.when(world.isValidLatitude(Mockito.anyObject())).thenReturn(Boolean.FALSE);
 		Mockito.when(world.isValidLatitude(Mockito.anyObject())).thenReturn(Boolean.TRUE);
 		
-		assertThat(Location.createNewLocation(world, 1L, 1L).isValidLocation()).isFalse();
+		assertThat(new Location(world, 1L, 1L).isValidLocation()).isFalse();
 		
 		Mockito.when(world.isValidLatitude(Mockito.anyObject())).thenReturn(Boolean.TRUE);
 		Mockito.when(world.isValidLatitude(Mockito.anyObject())).thenReturn(Boolean.FALSE);
 		
-		assertThat(Location.createNewLocation(world, 1L, 1L).isValidLocation()).isFalse();
+		assertThat(new Location(world, 1L, 1L).isValidLocation()).isFalse();
 	}
 	
 	@Test
@@ -40,7 +40,7 @@ public class LocationUnitTest {
 		   assertThat(local.getCurrentLongitude()).isEqualTo(3L);
 		};
 		
-		assertThat(Location.createNewLocation(world, 2L, 2L).move(Orientation.NORTH)).satisfies(locationRequirements);
+		assertThat(new Location(world, 2L, 2L).move(Orientation.NORTH)).satisfies(locationRequirements);
 	}
 	
 	@Test
@@ -50,7 +50,7 @@ public class LocationUnitTest {
 		   assertThat(local.getCurrentLongitude()).isEqualTo(1L);
 		};
 		
-		assertThat(Location.createNewLocation(world, 2L, 2L).move(Orientation.SOUTH)).satisfies(locationRequirements);
+		assertThat(new Location(world, 2L, 2L).move(Orientation.SOUTH)).satisfies(locationRequirements);
 	}
 	
 	@Test
@@ -60,7 +60,7 @@ public class LocationUnitTest {
 		   assertThat(local.getCurrentLongitude()).isEqualTo(2L);
 		};
 		
-		assertThat(Location.createNewLocation(world, 2L, 2L).move(Orientation.EAST)).satisfies(locationRequirements);
+		assertThat(new Location(world, 2L, 2L).move(Orientation.EAST)).satisfies(locationRequirements);
 	}
 	
 	@Test
@@ -70,6 +70,6 @@ public class LocationUnitTest {
 		   assertThat(local.getCurrentLongitude()).isEqualTo(2L);
 		};
 		
-		assertThat(Location.createNewLocation(world, 2L, 2L).move(Orientation.WEST)).satisfies(locationRequirements);
+		assertThat(new Location(world, 2L, 2L).move(Orientation.WEST)).satisfies(locationRequirements);
 	}
 }

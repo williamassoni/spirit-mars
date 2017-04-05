@@ -14,7 +14,8 @@ import br.com.assoni.mars.enums.MarsExceptionType;
 import br.com.assoni.mars.enums.Orientation;
 import br.com.assoni.mars.objects.Instruction;
 import br.com.assoni.mars.objects.Robot;
-import br.com.assoni.mars.objects.World;
+import br.com.assoni.mars.objects.location.Location;
+import br.com.assoni.mars.objects.location.World;
 
 public class InstructionUnitTest {
 
@@ -41,9 +42,9 @@ public class InstructionUnitTest {
 			assertThat(robot.isPresent()).isTrue();
 			assertThat(robot.get().getPosition()).contains(Orientation.EAST.getKey());
 		};
-			
-		Optional<Robot> robot = new Instruction("R").execute(new Robot(new World()));
 		
+		Location location = new Location(new World(), 0L, 0L);
+		Optional<Robot> robot = new Instruction("R").execute(new Robot(location));
 		
 		assertThat(robot).satisfies(robotRequirements);
 	}
@@ -54,8 +55,9 @@ public class InstructionUnitTest {
 			assertThat(robot.isPresent()).isTrue();
 			assertThat(robot.get().getPosition()).contains(Orientation.WEST.getKey());
 		};
-			
-		Optional<Robot> robot = new Instruction("L").execute(new Robot(new World()));
+		
+		Location location = new Location(new World(), 0L, 0L);
+		Optional<Robot> robot = new Instruction("L").execute(new Robot(location));
 		
 		assertThat(robot).satisfies(robotRequirements);
 	}

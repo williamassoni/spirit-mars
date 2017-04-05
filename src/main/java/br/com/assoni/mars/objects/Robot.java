@@ -4,13 +4,14 @@ import br.com.assoni.mars.enums.Direction;
 import br.com.assoni.mars.enums.MarsExceptionType;
 import br.com.assoni.mars.enums.Orientation;
 import br.com.assoni.mars.exception.MarsException;
+import br.com.assoni.mars.objects.location.Location;
 
 public class Robot {
 	private Orientation orientation;
 	private Location location;
 	
-	public Robot(World world){
-		this.location = Location.createNewLocation(world,0L, 0L);
+	public Robot(Location location){
+		this.location = location;
 		this.orientation = Orientation.NORTH;
 	}
 	

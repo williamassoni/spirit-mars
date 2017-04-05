@@ -1,4 +1,4 @@
-package br.com.assoni.mars.objects;
+package br.com.assoni.mars.objects.location;
 
 public class World {
 	private static final Long MAX_LATITUDE = 5L;
